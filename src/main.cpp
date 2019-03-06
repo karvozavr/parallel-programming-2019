@@ -94,6 +94,8 @@ void *consumer_routine(void *arg) {
     }
 
     if (producer_done) {
+      // Not forgetting to unlock mutex.
+      pthread_mutex_unlock(&value->value_mutex);
       break;
     }
 
