@@ -158,7 +158,6 @@ int run_threads(size_t num_threads) {
     sum += *(int *) val;
   }
 
-
   return sum;
 }
 
