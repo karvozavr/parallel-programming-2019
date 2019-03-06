@@ -2,7 +2,6 @@
 #include <iostream>
 #include <vector>
 #include <sstream>
-#include <zconf.h>
 #include <thread>
 
 enum shared_value_status {
