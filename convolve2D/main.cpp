@@ -10,11 +10,11 @@
 #include <iterator>
 
 template<typename T>
-void fill_matrix(T *matrix, size_t N) {
+void fill_matrix_from_stdin(T *matrix, size_t N) {
   for (size_t i = 0; i < N; ++i) {
     for (size_t j = 0; j < N; ++j) {
       size_t idx = i * N + j;
-      matrix[idx] = rand() % 10;
+      std::cin >> matrix[idx];
     }
   }
 }
@@ -32,8 +32,13 @@ void fill_matrix(T *matrix, size_t N, T value) {
 static const std::string KERNEL_SRC = "convolve2D.cl";
 
 int main() {
-  size_t N = 5;
-  size_t M = 3;
+  std::freopen("input.txt", "r", stdin);
+  std::freopen("output.txt", "w", stdout);
+
+  size_t N = 0;
+  size_t M = 0;
+
+  std::cin >> N >> M;
 
   size_t matrix_size = N * N;
   size_t kernel_size = M * M;
@@ -42,8 +47,8 @@ int main() {
   std::unique_ptr<double[]> kernel(new double[kernel_size]);
   std::unique_ptr<double[]> result(new double[matrix_size]);
 
-  fill_matrix<double>(matrix.get(), N, 1);
-  fill_matrix<double>(kernel.get(), M, 1);
+  fill_matrix_from_stdin<double>(matrix.get(), N);
+  fill_matrix_from_stdin<double>(kernel.get(), M);
   fill_matrix<double>(result.get(), N, 0);
 
   std::vector<cl::Platform> platforms;
